@@ -20,7 +20,7 @@ data "archive_file" "lambda_zip" {
 
 # Create Lambda function first without API Gateway permission
 module "lambda" {
-  source = "../../../harness-iac/modules/lambda"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/lambda?ref=main"
 
   function_name = var.function_name
   description   = var.description
@@ -47,7 +47,7 @@ module "lambda" {
 
 # Create API Gateway and integrate with Lambda
 module "api_gateway" {
-  source = "../../../harness-iac/modules/api-gateway"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/api-gateway?ref=main"
 
   api_name    = var.api_name
   description = var.api_description
