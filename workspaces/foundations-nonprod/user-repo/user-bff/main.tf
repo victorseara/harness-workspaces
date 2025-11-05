@@ -4,7 +4,7 @@
 
 module "bff" {
   for_each = local.environments
-  source   = "../../../modules/bff"
+  source   = "../../../../modules/bff"
 
   # Lambda Configuration
   function_name = each.value.function_name
