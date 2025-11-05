@@ -13,7 +13,7 @@ variable "description" {
 variable "handler" {
   description = "Lambda function handler"
   type        = string
-  default     = "index.handler"
+  default     = "placeholder.handler"
 }
 
 variable "runtime" {
