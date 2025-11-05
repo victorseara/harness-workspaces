@@ -4,7 +4,7 @@
 
 module "bff" {
   for_each = local.environments
-  source   = "git::https://github.com/victorseara/harness-root-iac.git//workspaces/modules/bff?ref=main"
+  source   = "../../../modules/bff"
 
   # Lambda Configuration
   function_name = each.value.function_name
