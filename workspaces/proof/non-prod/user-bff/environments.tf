@@ -113,7 +113,7 @@ locals {
   # =============================================================================
   # These defaults are applied to all environments
 
-  default_handler                 = "placeholder.handler"
+  default_handler                 = "main.handler"
   default_runtime                 = "nodejs20.x"
   default_source_dir              = null # Uses placeholder from BFF module
   default_output_path             = null
