@@ -28,7 +28,7 @@ provider "aws" {
 # and manages their configurations. No need to pass environment-specific configs here.
 
 module "user_bff" {
-  source = "./user-repo/user-bff"
+  source = "./user-bff"
 }
 
 # =============================================================================
