@@ -31,7 +31,7 @@ module "user_bff" {
   source = "./user-bff"
 }
 
-module "user_bff" {
+module "homepage_bff" {
   source = "./homepage-bff"
 }
 
