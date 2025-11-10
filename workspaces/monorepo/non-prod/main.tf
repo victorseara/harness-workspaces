@@ -21,12 +21,6 @@ provider "aws" {
   }
 }
 
-# =============================================================================
-# User BFF Module
-# =============================================================================
-# The user-bff module internally creates all environments (dev, demo, stg, perf)
-# and manages their configurations. No need to pass environment-specific configs here.
-
 module "user_bff" {
   source = "./user-bff"
 }
