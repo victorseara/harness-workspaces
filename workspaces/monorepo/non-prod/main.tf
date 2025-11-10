@@ -34,15 +34,3 @@ module "user_bff" {
 module "homepage_bff" {
   source = "./homepage-bff"
 }
-
-# =============================================================================
-# Add more BFF modules here as needed
-# =============================================================================
-# Example:
-# module "auth_bff" {
-#   source = "./auth-bff"
-# }
-#
-# module "order_bff" {
-#   source = "./order-bff"
-# }
