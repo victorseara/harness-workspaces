@@ -63,7 +63,5 @@ module "api_gateway" {
   cors_max_age           = var.cors_max_age
   cors_allow_credentials = var.cors_allow_credentials
 
-  log_retention_days = var.log_retention_days
-
   tags = var.tags
 }

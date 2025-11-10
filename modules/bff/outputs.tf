@@ -65,11 +65,6 @@ output "api_stage_id" {
   value       = module.api_gateway.default_stage_id
 }
 
-output "api_log_group_name" {
-  description = "Name of the API Gateway CloudWatch log group"
-  value       = module.api_gateway.log_group_name
-}
-
 output "api_stage_execution_arn" {
   description = "Execution ARN of the API Gateway default stage"
   value       = module.api_gateway.default_stage_execution_arn
