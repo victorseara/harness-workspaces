@@ -1,7 +1,7 @@
 # =============================================================================
-# User BFF - Environment Configurations
+# Homepage BFF - Environment Configurations
 # =============================================================================
-# This file defines all environment-specific configurations for the User BFF
+# This file defines all environment-specific configurations for the Homepage BFF
 # Environments: dev, demo, stg, perf
 
 locals {
@@ -9,7 +9,7 @@ locals {
   environments = {
     dev = {
       function_name = "dev-homepage-bff"
-      description   = "User BFF - Backend for Frontend for User services in dev environment"
+      description   = "Homepage BFF - Backend for Frontend for Homepage services in dev environment"
       memory_size   = 256
       timeout       = 30
 
@@ -26,7 +26,7 @@ locals {
 
       tags = {
         Team        = "platform"
-        Project     = "user-services"
+        Project     = "homepage-bff"
         Service     = "homepage-bff"
         Environment = "dev"
       }
@@ -34,7 +34,7 @@ locals {
 
     demo = {
       function_name = "demo-homepage-bff"
-      description   = "User BFF - Backend for Frontend for User services in demo environment"
+      description   = "Homepage BFF - Backend for Frontend for Homepage services in demo environment"
       memory_size   = 256
       timeout       = 30
 
@@ -51,7 +51,7 @@ locals {
 
       tags = {
         Team        = "platform"
-        Project     = "user-services"
+        Project     = "homepage-bff"
         Service     = "homepage-bff"
         Environment = "demo"
       }
@@ -59,7 +59,7 @@ locals {
 
     stg = {
       function_name = "stg-homepage-bff"
-      description   = "User BFF - Backend for Frontend for User services in staging environment"
+      description   = "Homepage BFF - Backend for Frontend for Homepage services in staging environment"
       memory_size   = 512
       timeout       = 60
 
@@ -76,7 +76,7 @@ locals {
 
       tags = {
         Team        = "platform"
-        Project     = "user-services"
+        Project     = "homepage-bff"
         Service     = "homepage-bff"
         Environment = "stg"
       }
@@ -84,7 +84,7 @@ locals {
 
     perf = {
       function_name = "perf-homepage-bff"
-      description   = "User BFF - Backend for Frontend for User services in performance testing environment"
+      description   = "Homepage BFF - Backend for Frontend for Homepage services in performance testing environment"
       memory_size   = 1024
       timeout       = 60
 
@@ -101,7 +101,7 @@ locals {
 
       tags = {
         Team        = "platform"
-        Project     = "user-services"
+        Project     = "homepage-bff"
         Service     = "homepage-bff"
         Environment = "perf"
       }
