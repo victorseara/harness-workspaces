@@ -22,7 +22,6 @@ locals {
       role_name = "dev-homepage-bff-role"
       api_name  = "dev-homepage-bff-api"
 
-      log_retention_days = 7
 
       tags = {
         Team        = "platform"
@@ -47,7 +46,6 @@ locals {
       role_name = "demo-homepage-bff-role"
       api_name  = "demo-homepage-bff-api"
 
-      log_retention_days = 7
 
       tags = {
         Team        = "platform"
@@ -72,7 +70,6 @@ locals {
       role_name = "stg-homepage-bff-role"
       api_name  = "stg-homepage-bff-api"
 
-      log_retention_days = 14
 
       tags = {
         Team        = "platform"
@@ -97,7 +94,6 @@ locals {
       role_name = "perf-homepage-bff-role"
       api_name  = "perf-homepage-bff-api"
 
-      log_retention_days = 3
 
       tags = {
         Team        = "platform"

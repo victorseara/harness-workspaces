@@ -34,7 +34,6 @@ module "lambda" {
 
   role_name          = var.role_name
   custom_policy_json = var.custom_policy_json
-  log_retention_days = var.log_retention_days
 
   ignore_source_code_hash = var.ignore_source_code_hash
 

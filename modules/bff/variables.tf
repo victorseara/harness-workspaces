@@ -126,12 +126,6 @@ variable "cors_allow_credentials" {
 }
 
 # Shared Configuration
-variable "log_retention_days" {
-  description = "CloudWatch log retention in days (applies to Lambda only)"
-  type        = number
-  default     = 7
-}
-
 variable "tags" {
   description = "Tags to apply to all resources"
   type        = map(string)

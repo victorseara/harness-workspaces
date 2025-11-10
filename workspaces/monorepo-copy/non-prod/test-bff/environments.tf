@@ -22,8 +22,6 @@ locals {
       role_name = "dev-test-bff-role"
       api_name  = "dev-test-bff-api"
 
-      log_retention_days = 7
-
       tags = {
         Team        = "platform"
         Project     = "user-services"
@@ -46,8 +44,6 @@ locals {
 
       role_name = "demo-test-bff-role"
       api_name  = "demo-test-bff-api"
-
-      log_retention_days = 7
 
       tags = {
         Team        = "platform"
@@ -72,8 +68,6 @@ locals {
       role_name = "stg-test-bff-role"
       api_name  = "stg-test-bff-api"
 
-      log_retention_days = 14
-
       tags = {
         Team        = "platform"
         Project     = "user-services"
@@ -96,8 +90,6 @@ locals {
 
       role_name = "perf-test-bff-role"
       api_name  = "perf-test-bff-api"
-
-      log_retention_days = 3
 
       tags = {
         Team        = "platform"

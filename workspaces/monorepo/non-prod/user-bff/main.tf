@@ -37,7 +37,5 @@ module "bff" {
   cors_allow_credentials = local.default_cors_allow_credentials
 
   # Shared Configuration
-  log_retention_days = each.value.log_retention_days
-
   tags = each.value.tags
 }

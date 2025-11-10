@@ -24,11 +24,6 @@ output "lambda_role_name" {
   value       = module.lambda.role_name
 }
 
-output "lambda_log_group_name" {
-  description = "Name of the Lambda CloudWatch log group"
-  value       = module.lambda.log_group_name
-}
-
 output "lambda_qualified_arn" {
   description = "Qualified ARN of the Lambda function"
   value       = module.lambda.qualified_arn

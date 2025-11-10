@@ -8,7 +8,6 @@ A high-level Terraform module that creates a complete BFF infrastructure by comb
 - **Automatically zips Lambda source files** - No need to pre-zip your code!
 - Provisions an API Gateway HTTP API with default route integration
 - Automatically configures Lambda permissions for API Gateway invocation
-- Includes CloudWatch logging for both Lambda and API Gateway
 - Supports CORS configuration
 - Configurable IAM roles and policies for Lambda
 - Tags support across all resources
@@ -73,9 +72,6 @@ module "my_bff" {
   cors_allow_origins = ["https://example.com"]
   cors_allow_methods = ["GET", "POST", "PUT", "DELETE"]
 
-  # Logging
-  log_retention_days = 14
-
   # Tags
   tags = {
     Environment = "production"
@@ -138,7 +134,6 @@ This module uses:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|----------|
-| log_retention_days | CloudWatch log retention in days (applies to both Lambda and API Gateway) | number | 7 | no |
 | tags | Tags to apply to all resources | map(string) | {} | no |
 
 ## Outputs
@@ -152,7 +147,6 @@ This module uses:
 | lambda_invoke_arn | Invoke ARN of the Lambda function |
 | lambda_role_arn | ARN of the Lambda IAM role |
 | lambda_role_name | Name of the Lambda IAM role |
-| lambda_log_group_name | Name of the Lambda CloudWatch log group |
 | lambda_qualified_arn | Qualified ARN of the Lambda function |
 | lambda_version | Latest published version of the Lambda function |
 
@@ -165,7 +159,6 @@ This module uses:
 | api_execution_arn | Execution ARN of the API Gateway |
 | api_invoke_url | Invoke URL of the API Gateway default stage |
 | api_stage_id | ID of the API Gateway default stage |
-| api_log_group_name | Name of the API Gateway CloudWatch log group |
 | api_stage_execution_arn | Execution ARN of the API Gateway default stage |
 
 ## How It Works
@@ -178,8 +171,7 @@ This module uses:
 3. **API Gateway**: Creates an API Gateway HTTP API using the API Gateway module from `harness-iac/modules/api-gateway`
 4. **Integration**: The API Gateway is configured with a default route (`$default`) that integrates with the Lambda function
 5. **Permissions**: Lambda permissions are automatically configured to allow API Gateway to invoke the function
-6. **Logging**: Both resources are configured with CloudWatch logging
-7. **Tagging**: All resources are tagged with the provided tags
+6. **Tagging**: All resources are tagged with the provided tags
 
 ## Notes
 
