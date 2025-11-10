@@ -8,101 +8,101 @@ locals {
   # Environment-specific configurations
   environments = {
     dev = {
-      function_name = "dev-user-bff"
+      function_name = "dev-test-bff"
       description   = "User BFF - Backend for Frontend for User services in dev environment"
       memory_size   = 256
       timeout       = 30
 
       environment_variables = {
         ENVIRONMENT = "dev"
-        SERVICE     = "user-bff"
+        SERVICE     = "test-bff"
         LOG_LEVEL   = "debug"
       }
 
-      role_name = "dev-user-bff-role"
-      api_name  = "dev-user-bff-api"
+      role_name = "dev-test-bff-role"
+      api_name  = "dev-test-bff-api"
 
       log_retention_days = 7
 
       tags = {
         Team        = "platform"
         Project     = "user-services"
-        Service     = "user-bff"
+        Service     = "test-bff"
         Environment = "dev"
       }
     }
 
     demo = {
-      function_name = "demo-user-bff"
+      function_name = "demo-test-bff"
       description   = "User BFF - Backend for Frontend for User services in demo environment"
       memory_size   = 256
       timeout       = 30
 
       environment_variables = {
         ENVIRONMENT = "demo"
-        SERVICE     = "user-bff"
+        SERVICE     = "test-bff"
         LOG_LEVEL   = "info"
       }
 
-      role_name = "demo-user-bff-role"
-      api_name  = "demo-user-bff-api"
+      role_name = "demo-test-bff-role"
+      api_name  = "demo-test-bff-api"
 
       log_retention_days = 7
 
       tags = {
         Team        = "platform"
         Project     = "user-services"
-        Service     = "user-bff"
+        Service     = "test-bff"
         Environment = "demo"
       }
     }
 
     stg = {
-      function_name = "stg-user-bff"
+      function_name = "stg-test-bff"
       description   = "User BFF - Backend for Frontend for User services in staging environment"
       memory_size   = 512
       timeout       = 60
 
       environment_variables = {
         ENVIRONMENT = "stg"
-        SERVICE     = "user-bff"
+        SERVICE     = "test-bff"
         LOG_LEVEL   = "info"
       }
 
-      role_name = "stg-user-bff-role"
-      api_name  = "stg-user-bff-api"
+      role_name = "stg-test-bff-role"
+      api_name  = "stg-test-bff-api"
 
       log_retention_days = 14
 
       tags = {
         Team        = "platform"
         Project     = "user-services"
-        Service     = "user-bff"
+        Service     = "test-bff"
         Environment = "stg"
       }
     }
 
     perf = {
-      function_name = "perf-user-bff"
+      function_name = "perf-test-bff"
       description   = "User BFF - Backend for Frontend for User services in performance testing environment"
       memory_size   = 1024
       timeout       = 60
 
       environment_variables = {
         ENVIRONMENT = "perf"
-        SERVICE     = "user-bff"
+        SERVICE     = "test-bff"
         LOG_LEVEL   = "warn"
       }
 
-      role_name = "perf-user-bff-role"
-      api_name  = "perf-user-bff-api"
+      role_name = "perf-test-bff-role"
+      api_name  = "perf-test-bff-api"
 
       log_retention_days = 3
 
       tags = {
         Team        = "platform"
         Project     = "user-services"
-        Service     = "user-bff"
+        Service     = "test-bff"
         Environment = "perf"
       }
     }
