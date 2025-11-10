@@ -24,6 +24,11 @@ output "lambda_role_name" {
   value       = module.lambda.role_name
 }
 
+output "lambda_log_group_name" {
+  description = "Name of the Lambda CloudWatch log group"
+  value       = module.lambda.log_group_name
+}
+
 output "lambda_qualified_arn" {
   description = "Qualified ARN of the Lambda function"
   value       = module.lambda.qualified_arn
@@ -58,6 +63,11 @@ output "api_invoke_url" {
 output "api_stage_id" {
   description = "ID of the API Gateway default stage"
   value       = module.api_gateway.default_stage_id
+}
+
+output "api_log_group_name" {
+  description = "Name of the API Gateway CloudWatch log group"
+  value       = module.api_gateway.log_group_name
 }
 
 output "api_stage_execution_arn" {

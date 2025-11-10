@@ -34,6 +34,7 @@ module "lambda" {
 
   role_name          = var.role_name
   custom_policy_json = var.custom_policy_json
+  log_retention_days = var.log_retention_days
 
   ignore_source_code_hash = var.ignore_source_code_hash
 
@@ -61,6 +62,8 @@ module "api_gateway" {
   cors_expose_headers    = var.cors_expose_headers
   cors_max_age           = var.cors_max_age
   cors_allow_credentials = var.cors_allow_credentials
+
+  log_retention_days = var.log_retention_days
 
   tags = var.tags
 }
