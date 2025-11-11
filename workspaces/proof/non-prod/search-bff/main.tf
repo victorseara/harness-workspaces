@@ -6,7 +6,6 @@
 # and conflicts when deploying multiple APIs in parallel.
 
 resource "aws_iam_role" "api_gateway_logging" {
-  # Use a fixed name to ensure only one role is created per account
   name = "api-gateway-logging-to-cloudwatch"
 
   assume_role_policy = jsonencode({
