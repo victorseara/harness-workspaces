@@ -65,6 +65,8 @@ module "api_gateway" {
 
   log_retention_days = var.log_retention_days
 
+  stage_depends_on = var.stage_depends_on
+
   tags = var.tags
 }
 

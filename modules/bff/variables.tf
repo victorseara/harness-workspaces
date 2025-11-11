@@ -125,6 +125,12 @@ variable "cors_allow_credentials" {
   default     = false
 }
 
+variable "stage_depends_on" {
+  description = "A list of resources the API Gateway stage should explicitly depend on."
+  type        = list(any)
+  default     = []
+}
+
 # Shared Configuration
 variable "log_retention_days" {
   description = "CloudWatch log retention in days (applies to both Lambda and API Gateway)"
