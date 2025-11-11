@@ -21,10 +21,6 @@ provider "aws" {
   }
 }
 
-module "user_bff" {
-  source = "./user-bff"
-}
-
 module "homepage_bff" {
   source = "./homepage-bff"
 }
