@@ -30,5 +30,5 @@ module "orders_bff" {
 }
 
 module "search_bff" {
-  source = "./orders-bff"
+  source = "./search-bff"
 }
