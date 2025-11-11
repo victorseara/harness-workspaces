@@ -24,3 +24,7 @@ provider "aws" {
 module "homepage_bff" {
   source = "./homepage-bff"
 }
+
+module "orders_bff" {
+  source = "./orders-bff"
+}
