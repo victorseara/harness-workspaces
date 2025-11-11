@@ -38,9 +38,9 @@ module "lambda" {
 
   ignore_source_code_hash = var.ignore_source_code_hash
 
-  # API Gateway permission will be added after API Gateway is created
-  create_api_gateway_permission = true
-  api_gateway_execution_arn     = "${module.api_gateway.api_execution_arn}/*"
+  # Don't create API Gateway permission yet - will be added separately
+  create_api_gateway_permission = false
+  api_gateway_execution_arn     = null
 
   tags = var.tags
 }
@@ -66,4 +66,14 @@ module "api_gateway" {
   log_retention_days = var.log_retention_days
 
   tags = var.tags
+}
+
+# Add Lambda permission for API Gateway after both resources are created
+# This breaks the circular dependency
+resource "aws_lambda_permission" "api_gateway" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${module.api_gateway.api_execution_arn}/*"
 }
