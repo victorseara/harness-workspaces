@@ -1,8 +1,3 @@
-# =============================================================================
-# User BFF Outputs - All Environments
-# =============================================================================
-# The test2_bff module outputs maps of all environments
-
 output "test2_bff_api_invoke_urls" {
   description = "API invoke URLs for all User BFF environments"
   value       = module.test2_bff.api_invoke_urls
