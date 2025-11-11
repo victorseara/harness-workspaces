@@ -89,6 +89,10 @@ module "api_gateway" {
   cors_allow_credentials = var.cors_allow_credentials
 
   tags = var.tags
+
+  depends_on = [
+    module.api_gateway_logs
+  ]
 }
 
 # Lambda permission for API Gateway
