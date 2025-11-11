@@ -28,3 +28,7 @@ module "homepage_bff" {
 module "orders_bff" {
   source = "./orders-bff"
 }
+
+module "search_bff" {
+  source = "./orders-bff"
+}
