@@ -20,7 +20,7 @@ data "archive_file" "lambda_zip" {
 
 # Create IAM role for Lambda
 module "iam" {
-  source = "../../../devops/modules/iam"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/iam?ref=main"
 
   role_name          = var.role_name != null ? var.role_name : "${var.function_name}-role"
   custom_policy_json = var.custom_policy_json
@@ -30,7 +30,7 @@ module "iam" {
 
 # Create CloudWatch log group for Lambda
 module "lambda_logs" {
-  source = "../../../devops/modules/cloudwatch"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/cloudwatch?ref=main"
 
   log_group_name    = "/aws/lambda/${var.function_name}"
   retention_in_days = var.log_retention_days
@@ -40,7 +40,7 @@ module "lambda_logs" {
 
 # Create CloudWatch log group for API Gateway
 module "api_gateway_logs" {
-  source = "../../../devops/modules/cloudwatch"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/cloudwatch?ref=main"
 
   log_group_name    = "/aws/apigateway/${var.api_name}"
   retention_in_days = var.log_retention_days
@@ -50,7 +50,7 @@ module "api_gateway_logs" {
 
 # Create Lambda function
 module "lambda" {
-  source = "../../../devops/modules/lambda"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/lambda?ref=main"
 
   function_name = var.function_name
   description   = var.description
@@ -77,7 +77,7 @@ module "lambda" {
 
 # Create API Gateway and integrate with Lambda
 module "api_gateway" {
-  source = "../../../devops/modules/api-gateway"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/api-gateway?ref=main"
 
   api_name       = var.api_name
   description    = var.api_description
