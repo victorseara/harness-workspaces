@@ -18,9 +18,39 @@ data "archive_file" "lambda_zip" {
   ]
 }
 
-# Create Lambda function first without API Gateway permission
+# Create IAM role for Lambda
+module "iam" {
+  source = "../../../devops/modules/iam"
+
+  role_name          = var.role_name != null ? var.role_name : "${var.function_name}-role"
+  custom_policy_json = var.custom_policy_json
+
+  tags = var.tags
+}
+
+# Create CloudWatch log group for Lambda
+module "lambda_logs" {
+  source = "../../../devops/modules/cloudwatch"
+
+  log_group_name    = "/aws/lambda/${var.function_name}"
+  retention_in_days = var.log_retention_days
+
+  tags = var.tags
+}
+
+# Create CloudWatch log group for API Gateway
+module "api_gateway_logs" {
+  source = "../../../devops/modules/cloudwatch"
+
+  log_group_name    = "/aws/apigateway/${var.api_name}"
+  retention_in_days = var.log_retention_days
+
+  tags = var.tags
+}
+
+# Create Lambda function
 module "lambda" {
-  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/lambda?ref=main"
+  source = "../../../devops/modules/lambda"
 
   function_name = var.function_name
   description   = var.description
@@ -30,28 +60,29 @@ module "lambda" {
   memory_size   = var.memory_size
   filename      = data.archive_file.lambda_zip.output_path
 
-  environment_variables = var.environment_variables
+  role_arn = module.iam.role_arn
 
-  role_name          = var.role_name
-  custom_policy_json = var.custom_policy_json
-  log_retention_days = var.log_retention_days
+  environment_variables = var.environment_variables
 
   ignore_source_code_hash = var.ignore_source_code_hash
 
-  # Don't create API Gateway permission yet - will be added separately
-  create_api_gateway_permission = false
-  api_gateway_execution_arn     = null
+  # Lambda depends on IAM policy attachment and CloudWatch log group
+  depends_on_resources = [
+    module.iam.policy_attachment_id,
+    module.lambda_logs.log_group_id
+  ]
 
   tags = var.tags
 }
 
 # Create API Gateway and integrate with Lambda
 module "api_gateway" {
-  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/api-gateway?ref=main"
+  source = "../../../devops/modules/api-gateway"
 
-  api_name    = var.api_name
-  description = var.api_description
-  lambda_arn  = module.lambda.invoke_arn
+  api_name       = var.api_name
+  description    = var.api_description
+  lambda_arn     = module.lambda.invoke_arn
+  log_group_arn  = module.api_gateway_logs.log_group_arn
 
   integration_timeout_ms = var.integration_timeout_ms
 
@@ -62,10 +93,6 @@ module "api_gateway" {
   cors_expose_headers    = var.cors_expose_headers
   cors_max_age           = var.cors_max_age
   cors_allow_credentials = var.cors_allow_credentials
-
-  log_retention_days = var.log_retention_days
-
-  stage_depends_on = var.stage_depends_on
 
   tags = var.tags
 }
