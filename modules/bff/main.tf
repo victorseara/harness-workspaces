@@ -1,4 +1,4 @@
-# Archive the Lambda placeholder or source files into a zip
+# Archive the Lambda source files into a zip
 data "archive_file" "lambda_zip" {
   type        = "zip"
   source_dir  = var.source_dir != null ? var.source_dir : "${path.module}"
@@ -18,17 +18,7 @@ data "archive_file" "lambda_zip" {
   ]
 }
 
-# Create IAM role for Lambda
-module "iam" {
-  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/iam?ref=main"
-
-  role_name          = var.role_name != null ? var.role_name : "${var.function_name}-role"
-  custom_policy_json = var.custom_policy_json
-
-  tags = var.tags
-}
-
-# Create CloudWatch log group for Lambda
+# CloudWatch Log Group for Lambda
 module "lambda_logs" {
   source = "git::https://github.com/victorseara/harness-root-iac.git//modules/cloudwatch?ref=main"
 
@@ -38,7 +28,7 @@ module "lambda_logs" {
   tags = var.tags
 }
 
-# Create CloudWatch log group for API Gateway
+# CloudWatch Log Group for API Gateway
 module "api_gateway_logs" {
   source = "git::https://github.com/victorseara/harness-root-iac.git//modules/cloudwatch?ref=main"
 
@@ -48,45 +38,49 @@ module "api_gateway_logs" {
   tags = var.tags
 }
 
-# Create Lambda function
-module "lambda" {
-  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/lambda?ref=main"
+# IAM Role for Lambda
+module "iam" {
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/iam?ref=main"
 
-  function_name = var.function_name
-  description   = var.description
-  handler       = var.handler
-  runtime       = var.runtime
-  timeout       = var.timeout
-  memory_size   = var.memory_size
-  filename      = data.archive_file.lambda_zip.output_path
-
-  role_arn = module.iam.role_arn
-
-  environment_variables = var.environment_variables
-
-  ignore_source_code_hash = var.ignore_source_code_hash
-
-  # Lambda depends on IAM policy attachment and CloudWatch log group
-  depends_on_resources = [
-    module.iam.policy_attachment_id,
-    module.lambda_logs.log_group_id
-  ]
+  role_name = var.role_name != null ? var.role_name : "${var.function_name}-role"
 
   tags = var.tags
 }
 
-# Create API Gateway and integrate with Lambda
+# Lambda Function
+module "lambda" {
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/lambda?ref=main"
+
+  filename      = data.archive_file.lambda_zip.output_path
+  function_name = var.function_name
+  role_arn      = module.iam.role_arn
+  handler       = var.handler
+  runtime       = var.runtime
+  timeout       = var.timeout
+  memory_size   = var.memory_size
+  description   = var.description
+
+  environment_variables = var.environment_variables
+
+  tags = var.tags
+
+  depends_on = [
+    module.iam,
+    module.lambda_logs
+  ]
+}
+
+# API Gateway
 module "api_gateway" {
   source = "git::https://github.com/victorseara/harness-root-iac.git//modules/api-gateway?ref=main"
 
-  api_name       = var.api_name
-  description    = var.api_description
-  lambda_arn     = module.lambda.invoke_arn
-  log_group_arn  = module.api_gateway_logs.log_group_arn
+  api_name           = var.api_name
+  description        = var.api_description
+  lambda_invoke_arn  = module.lambda.invoke_arn
+  log_group_arn      = module.api_gateway_logs.log_group_arn
 
   integration_timeout_ms = var.integration_timeout_ms
 
-  # CORS configuration
   cors_allow_origins     = var.cors_allow_origins
   cors_allow_methods     = var.cors_allow_methods
   cors_allow_headers     = var.cors_allow_headers
@@ -97,8 +91,7 @@ module "api_gateway" {
   tags = var.tags
 }
 
-# Add Lambda permission for API Gateway after both resources are created
-# This breaks the circular dependency
+# Lambda permission for API Gateway
 resource "aws_lambda_permission" "api_gateway" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
