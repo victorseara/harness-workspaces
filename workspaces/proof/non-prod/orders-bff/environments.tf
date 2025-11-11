@@ -1,5 +1,4 @@
 locals {
-  # Environment-specific configurations
   environments = {
     dev = {
       function_name = "dev-orders-bff"
