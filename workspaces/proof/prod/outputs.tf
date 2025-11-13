@@ -1,5 +1,5 @@
 # ============================================================
-# Outputs for Homepage BFF in Non-Production Environment
+# Outputs for Homepage BFF in Production Environment
 # ============================================================
 output "homepage_bff_endpoints" {
   description = "API Gateway endpoint URLs for testing"
@@ -24,7 +24,7 @@ output "homepage_bff_secrets" {
 }
 
 # ============================================================
-# Outputs for Search BFF in Non-Production Environment
+# Outputs for Search BFF in Production Environment
 # ============================================================
 output "search_bff_endpoints" {
   description = "API Gateway endpoint URLs for testing"
