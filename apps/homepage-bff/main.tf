@@ -10,7 +10,7 @@ terraform {
 }
 
 module "homepage_bff" {
-  source   = "git@github.com:victorseara/harness-xp.git//devops/modules/lambda-node-bff?ref=main"
+  source   = "git::https://github.com/victorseara/harness-xp.git//devops/modules/lambda-node-bff?ref=main"
   for_each = local.environments
 
   app_name    = "homepage-bff-${each.key}"
