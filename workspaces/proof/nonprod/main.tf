@@ -3,7 +3,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Environment = "non-prod"
+      Environment = "nonprod"
       ManagedBy   = "terraform"
       Workspace   = var.workspace_name
     }
@@ -18,7 +18,7 @@ module "workspace" {
   log_retention_days = 30
 
   tags = {
-    Environment = "non-prod"
+    Environment = "nonprod"
   }
 }
 

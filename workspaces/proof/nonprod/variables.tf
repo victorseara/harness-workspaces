@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "workspace_name" {
   description = "Name of the Terraform workspace (e.g., 'team-homepage', 'team-checkout')"
   type        = string
-  default     = "non-prod-user-repo"
+  default     = "DE_Foundations_NonProd"
 }
 
 variable "env_type" {
