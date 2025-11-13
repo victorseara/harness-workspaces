@@ -12,7 +12,7 @@ provider "aws" {
 
 # Workspace foundations - centralized logging and shared infrastructure
 module "workspace" {
-  source = "git::https://github.com/victorseara/harness-xp.git//devops/modules/foundations-workspace?ref=main"
+  source = "git::https://github.com/victorseara/harness-root-iac.git//modules/foundations-workspace?ref=main"
 
   workspace_name     = var.workspace_name
   log_retention_days = 30
@@ -23,7 +23,7 @@ module "workspace" {
 }
 
 module "homepage_bff" {
-  source = "git::https://github.com/victorseara/harness-xp.git//foundations-iac/apps/homepage-bff?ref=main"
+  source = "../../../apps/homepage-bff"
 
   env_type                    = var.env_type
   workspace_api_log_group_arn = module.workspace.workspace_api_log_group_arn
