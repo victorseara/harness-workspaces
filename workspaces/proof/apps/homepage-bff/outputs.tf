@@ -2,14 +2,14 @@
 output "api_gateway_endpoints" {
   description = "API Gateway endpoint URLs for all Homepage BFF environments"
   value = {
-    for env, bff in module.search_bff : env => bff.api_gateway_endpoint
+    for env, bff in module.homepage_bff : env => bff.api_gateway_endpoint
   }
 }
 
 output "api_gateway_ids" {
   description = "API Gateway IDs for all Homepage BFF environments"
   value = {
-    for env, bff in module.search_bff : env => bff.api_gateway_id
+    for env, bff in module.homepage_bff : env => bff.api_gateway_id
   }
 }
 
@@ -17,14 +17,14 @@ output "api_gateway_ids" {
 output "lambda_function_names" {
   description = "Lambda function names for all Homepage BFF environments"
   value = {
-    for env, bff in module.search_bff : env => bff.lambda_function_name
+    for env, bff in module.homepage_bff : env => bff.lambda_function_name
   }
 }
 
 output "lambda_function_arns" {
   description = "Lambda function ARNs for all Homepage BFF environments"
   value = {
-    for env, bff in module.search_bff : env => bff.lambda_function_arn
+    for env, bff in module.homepage_bff : env => bff.lambda_function_arn
   }
 }
 
@@ -32,7 +32,7 @@ output "lambda_function_arns" {
 output "lambda_role_arns" {
   description = "Lambda execution role ARNs for all Homepage BFF environments"
   value = {
-    for env, bff in module.search_bff : env => bff.lambda_role_arn
+    for env, bff in module.homepage_bff : env => bff.lambda_role_arn
   }
 }
 
@@ -40,7 +40,7 @@ output "lambda_role_arns" {
 output "lambda_log_group_names" {
   description = "CloudWatch log group names for all Homepage BFF environments"
   value = {
-    for env, bff in module.search_bff : env => bff.lambda_log_group_name
+    for env, bff in module.homepage_bff : env => bff.lambda_log_group_name
   }
 }
 
@@ -48,7 +48,7 @@ output "lambda_log_group_names" {
 output "secrets" {
   description = "Created secrets for each environment"
   value = {
-    for env, bff in module.search_bff : env => bff.secrets
+    for env, bff in module.homepage_bff : env => bff.secrets
   }
   sensitive = true
 }
