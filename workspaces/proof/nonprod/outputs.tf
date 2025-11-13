@@ -47,3 +47,28 @@ output "search_bff_secrets" {
   value       = module.search_bff.secrets
   sensitive   = true
 }
+
+# ============================================================
+# Outputs for Payment BFF in Non-Production Environment
+# ============================================================
+output "payment_bff_endpoints" {
+  description = "API Gateway endpoint URLs for testing"
+  value       = module.payment_bff.api_gateway_endpoints
+}
+
+output "payment_bff_lambda_functions" {
+  description = "Lambda function names"
+  value       = module.payment_bff.lambda_function_names
+}
+
+output "payment_bff_api_gateway_ids" {
+  description = "API Gateway IDs"
+  value       = module.payment_bff.api_gateway_ids
+}
+
+# Homepage BFF - Sensitive outputs (secrets only)
+output "payment_bff_secrets" {
+  description = "Secrets for Payment BFF environments"
+  value       = module.payment_bff.secrets
+  sensitive   = true
+}

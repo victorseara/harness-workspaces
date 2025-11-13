@@ -35,3 +35,10 @@ module "search_bff" {
   env_type                    = var.env_type
   workspace_api_log_group_arn = module.workspace.workspace_api_log_group_arn
 }
+
+module "payment_bff" {
+  source = "../apps/payment-bff"
+
+  env_type                    = var.env_type
+  workspace_api_log_group_arn = module.workspace.workspace_api_log_group_arn
+}
