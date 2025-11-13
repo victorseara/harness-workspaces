@@ -56,7 +56,6 @@ locals {
     }
     prod = {
       lambda_memory_size             = 1024
-      reserved_concurrent_executions = 100 # Reserve concurrency for prod
       log_retention_days             = 30
       throttling_burst_limit         = 2000
       throttling_rate_limit          = 500
