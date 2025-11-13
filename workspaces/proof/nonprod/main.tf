@@ -28,3 +28,10 @@ module "homepage_bff" {
   env_type                    = var.env_type
   workspace_api_log_group_arn = module.workspace.workspace_api_log_group_arn
 }
+
+module "search_bff" {
+  source = "../apps/search-bff"
+
+  env_type                    = var.env_type
+  workspace_api_log_group_arn = module.workspace.workspace_api_log_group_arn
+}

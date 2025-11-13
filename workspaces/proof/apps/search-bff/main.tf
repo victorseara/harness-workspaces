@@ -9,12 +9,12 @@ terraform {
   }
 }
 
-module "homepage_bff" {
+module "search_bff" {
   source   = "git::https://github.com/victorseara/harness-root-iac.git//modules/lambda-node-bff?ref=main"
   for_each = local.environments
 
-  app_name    = "${each.key}-homepage-bff"
-  description = "Homepage BFF - Express.js application running on Lambda (${each.key} environment)"
+  app_name    = "${each.key}-search-bff"
+  description = "Search BFF - Express.js application running on Lambda (${each.key} environment)"
 
   # Lambda Configuration
   # Code managed via separate deployment pipeline
@@ -29,7 +29,7 @@ module "homepage_bff" {
   log_retention_days             = each.value.log_retention_days
 
   # API Gateway Configuration
-  api_gateway_description        = "API Gateway for Homepage BFF (${each.key})"
+  api_gateway_description        = "API Gateway for Search BFF (${each.key})"
   cors_allow_origins             = each.value.cors_allow_origins
   cors_allow_methods             = ["GET", "POST", "OPTIONS"]
   cors_allow_headers             = ["Content-Type", "Authorization", "X-Api-Key"]
@@ -39,7 +39,7 @@ module "homepage_bff" {
   throttling_burst_limit         = each.value.throttling_burst_limit
   throttling_rate_limit          = each.value.throttling_rate_limit
   centralized_api_log_group_arn  = var.workspace_api_log_group_arn
-  bff_name                       = "${each.key}-homepage-bff"
+  bff_name                       = "${each.key}-search-bff"
   environment                    = each.key
 
   # Secrets (optional - example configuration)
@@ -47,7 +47,7 @@ module "homepage_bff" {
 
   tags = {
     Environment = each.key
-    Project     = "homepage-bff"
+    Project     = "search-bff"
     BFF         = "homepage"
   }
 }
