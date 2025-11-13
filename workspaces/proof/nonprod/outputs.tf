@@ -28,7 +28,7 @@ output "homepage_bff_secrets" {
 # ============================================================
 output "search_bff_endpoints" {
   description = "API Gateway endpoint URLs for testing"
-  value       = module.search_bff_api.gateway_endpoints
+  value       = module.search_bff.api_gateway_endpoints
 }
 
 output "search_bff_lambda_functions" {
